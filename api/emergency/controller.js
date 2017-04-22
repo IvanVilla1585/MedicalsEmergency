@@ -12,10 +12,11 @@ class EmergencyController {
 
   createEmergency(req, res, next) {
     let emergency = new EmergencyModel(req.body);
-    if (!ambulance.car || !ambulance.car_plate || !ambulance.car_type) {
-      res.status(400);
+    /*if (!emergency.date || !emergency.type_emergency || !emergency.driver || !emergency.ambulance ||
+        !emergency.paramedic.length > 0 || !emergency.patient.length > 0 || !emergency.hospital || !emergency.coordinates.length > 0) {
+      res.status(500);
       return res.json({message: 'ingrese los campos obligatorios'});
-    }
+    }*/
     emergency.save()
       .then(savedEmergency => res.json(savedEmergency))
       .catch(e => next(e));
