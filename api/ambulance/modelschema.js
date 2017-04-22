@@ -4,7 +4,7 @@ const AmbulanceSchema = new mongoose.Schema({
   car: { type: String, require: true},
   car_plate: { type: String, require: true},
   type_ambulance: {type: String, require: true},
-  available: {type: Boolean}
+  available: {type: Boolean, default: true}
 });
 
 AmbulanceSchema.statics = {
@@ -21,10 +21,11 @@ AmbulanceSchema.statics = {
         if (contact) {
           return contact;
         }
-        const err = new Error(`not found the ambulance with the id ${id}`);
+        const err = new Error(`La ambulancia con el id ${id} no existe`);
         return Promise.reject(err);
       });
   }
 };
 const AmbulanceModel = mongoose.model('ambulances', AmbulanceSchema);
 exports.AmbulanceModel = AmbulanceModel;
+exports.AmbulanceSchema = AmbulanceSchema;
