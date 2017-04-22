@@ -1,30 +1,33 @@
 const mongoose = require('mongoose');
 
-const AmbulanceSchema = new mongoose.Schema({
-  car: { type: String, require: true},
-  car_plate: { type: String, require: true},
-  type_ambulance: {type: String, require: true},
-  available: {type: Boolean, require: true}
+const ParamedicSchema = new mongoose.Schema({
+  name: { type: String, require: true},
+  lastname: { type: String},
+  phone: {type: String, require: true},
+  gender: {type: Number, require: true},
+  cellPhone: {type: String},
+  birthdate: {type: Date},
+  specialization: {type: String, require: true}
 });
 
-AmbulanceSchema.statics = {
+ParamedicSchema.statics = {
   list({ skip = 0, limit = 50 } = {}) {
     return this.find()
       .skip(parseInt(skip))
       .limit(parseInt(limit))
       .exec();
   },
-  getContactById(id) {
+  getParamedicById(id) {
     return this.findById(id)
       .exec()
       .then((contact) => {
         if (contact) {
           return contact;
         }
-        const err = new Error(`not found the ambulance with the id ${id}`);
+        const err = new Error(`not found the paramedic with the id ${id}`);
         return Promise.reject(err);
       });
   }
 };
-const AmbulanceModel = mongoose.model('ambulances', AmbulanceSchema);
-exports.AmbulanceModel = AmbulanceModel;
+const ParamedicModel = mongoose.model('paramedics', ParamedicSchema);
+exports.ParamedicModel = ParamedicModel;
