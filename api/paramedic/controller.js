@@ -1,5 +1,5 @@
 const { ParamedicModel } = require('./modelschema');
-const { validator } = require('../../lib/validator');
+//const { validator } = require('../../lib/validator');
 
 class ParamedicController {
   loadParamedicById(req, res, next, id) {
