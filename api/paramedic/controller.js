@@ -1,4 +1,5 @@
-var { ParamedicModel } = require('./modelschema');
+const { ParamedicModel } = require('./modelschema');
+const { validator } = require('../../lib/validator');
 
 class ParamedicController {
   loadParamedicById(req, res, next, id) {
@@ -12,7 +13,8 @@ class ParamedicController {
 
   createParamedic(req, res, next) {
     let paramedic = new ParamedicModel(req.body);
-    if (paramedic.name || paramedic.phone || paramedic.gender || paramedic.specialization) {
+    //const fields = ['name', 'phone', 'gender', 'specialization'];
+    if (!paramedic.name || !paramedic.phone || !paramedic.gender || !paramedic.specialization) {
       res.status(400);
       return res.json({message: 'ingrese los campos obligatorios'});
     }
