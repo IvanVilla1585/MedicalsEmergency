@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const {AmbulanceRoutes} = require('./api/ambulance/routes');
 const routerParamedic = require('./api/paramedic/routes');
+const routerEmergency = require('./api/emergency/routes');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -16,5 +17,6 @@ app.use(bodyparser.json());
 
 let ambulanceRouter = new AmbulanceRoutes(app);
 app.use('/api', routerParamedic);
+app.use('/api', routerEmergency);
 
 const server = app.listen(port, () => console.log(`server listening in port ${port}`));
