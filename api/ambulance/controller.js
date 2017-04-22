@@ -12,7 +12,7 @@ class AmbulanceController {
 
   createAmbulance(req, res, next) {
     let ambulance = new AmbulanceModel(req.body);
-    if (ambulance.car || ambulance.car_plate || ambulance.car_type) {
+    if (!ambulance.car || !ambulance.car_plate || !ambulance.car_type) {
       res.status(400);
       return res.json({message: 'ingrese los campos obligatorios'});
     }
