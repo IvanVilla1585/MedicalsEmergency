@@ -1,0 +1,17 @@
+{
+  "name": "api-medical-emergency",
+  "version": "1.0.0",
+  "description": "api for register the medical emergency",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js"
+  },
+  "author": "Ivan Dario Villa Ramirez <trezegue55@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.5"
+  }
+}
