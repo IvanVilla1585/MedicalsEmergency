@@ -4,7 +4,7 @@ const AmbulanceSchema = new mongoose.Schema({
   car: { type: String, require: true},
   car_plate: { type: String, require: true},
   type_ambulance: {type: String, require: true},
-  available: {type: Boolean, require: true}
+  available: {type: Boolean}
 });
 
 AmbulanceSchema.statics = {
