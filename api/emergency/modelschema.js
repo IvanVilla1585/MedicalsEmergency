@@ -29,7 +29,7 @@ EmergencySchema.statics = {
       .limit(parseInt(limit))
       .exec();
   },
-  getEmergencySchemaById(id) {
+  getEmergencyById(id) {
     return this.findById(id)
       .exec()
       .then((emergency) => {
