@@ -10,13 +10,17 @@ class EmergencyController {
       .catch(e => next(e));
   }
 
+  isEmptyObject(obj) {
+    for(var i in obj) { return false; }
+    return true;
+  }
   createEmergency(req, res, next) {
     let emergency = new EmergencyModel(req.body);
-    /*if (!emergency.date || !emergency.type_emergency || !emergency.driver || !emergency.ambulance ||
-        !emergency.paramedic.length > 0 || !emergency.patient.length > 0 || !emergency.hospital || !emergency.coordinates.length > 0) {
+    if (!emergency.date || !emergency.type_emergency /*|| !emergency.driver || !emergency.ambulance*/ ||
+        !emergency.paramedic.length > 0 || !emergency.patient.length > 0 /*|| !emergency.hospital*/ || !emergency.location.coordinates.length > 0) {
       res.status(500);
       return res.json({message: 'ingrese los campos obligatorios'});
-    }*/
+    }
     emergency.save()
       .then(savedEmergency => res.json(savedEmergency))
       .catch(e => next(e));
@@ -30,6 +34,12 @@ class EmergencyController {
   }
 
   updateEmergency(persitedEmergency, updatedEmergencyState, res, next) {
+    if (!updatedEmergencyState.date || !updatedEmergencyState.type_emergency /*|| !emergency.driver || !emergency.ambulance*/ ||
+    !updatedEmergencyState.paramedic.length > 0 || !updatedEmergencyState.patient.length > 0 /*|| !emergency.hospital*/ ||
+    !updatedEmergencyState.location.coordinates.length > 0) {
+      res.status(500);
+      return res.json({message: 'ingrese los campos obligatorios'});
+    }
     Object.keys(updatedEmergencyState).filter(propertyName => persitedEmergency[propertyName] && propertyName !== '_id' && propertyName !== '__v').forEach(propertyName => {
       persitedEmergency[propertyName] = updatedEmergencyState[propertyName];
     });
