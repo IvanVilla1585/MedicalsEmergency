@@ -1,17 +1,26 @@
 const mongoose = require('mongoose');
-const {AmbulanceSchema} = require('../ambulance/modelschema');
-const {ParamedicSchema} = require('../paramedic/modelschema');
+const { ParamedicSchema } = require('../paramedic/modelschema');
+const { AmbulanceSchema } = require('../ambulance/modelschema');
 
 const EmergencySchema = new mongoose.Schema({
   date: { type: Date, require: true},
-  typeEmergency: { type: String , require: true},
-  locationEmergency: {type: String, require: true},
-  ambulance:  {type: AmbulanceSchema, require: true},
-  paramedic: {type: [ParamedicSchema], require: true},  
+  type_emergency: { type: String, require: true },
+  driver: {type: ParamedicSchema, require: true},
+  ambulance: {type: AmbulanceSchema, require: true},
+  paramedic: {type: [ParamedicSchema], require: true},
   patient: {type: [mongoose.Schema.Types.Mixed], require: true},
-  hospital: {type: mongoose.Schema.Types.Mixed, require: true},
-  driver: {type: String, require: true}
+  hospital: {type: Object, require: true},
+  location: {
+    type: {
+      type: String,
+      default: 'Point',
+      require: true
+    },
+    coordinates: [Number]
+  }
 });
+
+EmergencySchema.index({ location: '2dsphere' });
 
 EmergencySchema.statics = {
   list({ skip = 0, limit = 50 } = {}) {
@@ -23,14 +32,14 @@ EmergencySchema.statics = {
   getEmergencyById(id) {
     return this.findById(id)
       .exec()
-      .then((contact) => {
-        if (contact) {
-          return contact;
+      .then((emergency) => {
+        if (emergency) {
+          return emergency;
         }
-        const err = new Error(`not found the emergency with the id ${id}`);
+        const err = new Error(`La emergencia con el id ${id} no existe`);
         return Promise.reject(err);
       });
   }
 };
-const EmergencyModel = mongoose.model('emergencys', EmergencySchema);
+const EmergencyModel = mongoose.model('emergencies', EmergencySchema);
 exports.EmergencyModel = EmergencyModel;

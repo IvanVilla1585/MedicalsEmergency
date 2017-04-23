@@ -13,10 +13,9 @@ class ParamedicController {
 
   createParamedic(req, res, next) {
     let paramedic = new ParamedicModel(req.body);
-    //const fields = ['name', 'phone', 'gender', 'specialization'];
     if (!paramedic.name || !paramedic.phone || !paramedic.gender || !paramedic.specialization) {
-      res.status(400);
-      return res.json({message: 'ingrese los campos obligatorios'});
+      res.status(500);
+      return res.json({message: 'Ingrese los campos obligatorios'});
     }
     paramedic.save()
       .then(savedParamedic => res.json(savedParamedic))
@@ -31,6 +30,10 @@ class ParamedicController {
   }
 
   updateParamedic(persitedParamedic, updatedParamedicState, res, next) {
+    if (!persitedParamedic.name || !persitedParamedic.phone || !persitedParamedic.gender || !persitedParamedic.specialization) {
+      res.status(500);
+      return res.json({message: 'Ingrese los campos obligatorios'});
+    }
     Object.keys(updatedParamedicState).filter(propertyName => persitedParamedic[propertyName] && propertyName !== '_id' && propertyName !== '__v').forEach(propertyName => {
       persitedParamedic[propertyName] = updatedParamedicState[propertyName];
     });

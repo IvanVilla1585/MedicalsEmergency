@@ -10,11 +10,11 @@ class EmergencyRoutes extends Router {
 
   get routes() {
     return {
-      '/api/emergencys': [
-        new Route("get", "getEmergencyList"),
+      '/api/emergencies': [
+        new Route("get", "getEmergenciesList"),
         new Route("post", "createEmergency")
       ],
-      '/api/emergencys/:emergencyId': [
+      '/api/emergencies/:emergencyId': [
         new Route("get", "getEmergency"),
         new Route("put", "updateEmergency"),
         new Route("delete", "deleteEmergency")
@@ -26,8 +26,8 @@ class EmergencyRoutes extends Router {
     emergencyController.createEmergency(req, res, next);
   }
 
-  getEmergencyList(req, res, next) {
-    emergencyController.listEmergencys(req.query, res, next);
+  getEmergenciesList(req, res, next) {
+    emergencyController.listEmergencies(req.query, res, next);
   }
 
   getEmergency(req, res, next) {

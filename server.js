@@ -3,7 +3,7 @@ const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 
 const {AmbulanceRoutes} = require('./api/ambulance/routes');
-const routerParamedic = require('./api/paramedic/routes');
+const {ParamedicRoutes} = require('./api/paramedic/routes');
 const {EmergencyRoutes} = require('./api/emergency/routes');
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(bodyparser.json());
 
 
 let ambulanceRouter = new AmbulanceRoutes(app);
-let emergencyRouter = new EmergencyRoutes(app);
-app.use('/api', routerParamedic);
+let paramedicRoutes = new ParamedicRoutes(app);
+let emergencyRoutes = new EmergencyRoutes(app);
 
 const server = app.listen(port, () => console.log(`server listening in port ${port}`));

@@ -1,5 +1,4 @@
-const { EmergencyModel } = require('./modelschema');
-//const { validator } = require('../../lib/validator');
+var { EmergencyModel } = require('./modelschema');
 
 class EmergencyController {
   loadEmergencyById(req, res, next, id) {
@@ -11,23 +10,23 @@ class EmergencyController {
       .catch(e => next(e));
   }
 
+  isEmptyObject(obj) {
+    for(var i in obj) { return false; }
+    return true;
+  }
   createEmergency(req, res, next) {
     let emergency = new EmergencyModel(req.body);
-    /*
-    if (!emergency.date || !emergency.typeEmergency || !emergency.locationEmergency || 
-    	!emergency.ambulance || !emergency.paramedic.length < 1 || !emergency.patient.length < 1
-    	|| !emergency.hospital || !emergency.driver) {
+    if (!emergency.date || !emergency.type_emergency /*|| !emergency.driver || !emergency.ambulance*/ ||
+        !emergency.paramedic.length > 0 || !emergency.patient.length > 0 /*|| !emergency.hospital*/ || !emergency.location.coordinates.length > 0) {
       res.status(500);
-      return res.json({message: 'ingrese los campos obligatorios'});
+      return res.json({message: 'Ingrese los campos obligatorios'});
     }
-    */
-    console.log(emergency);
     emergency.save()
       .then(savedEmergency => res.json(savedEmergency))
       .catch(e => next(e));
   }
 
-  listEmergencys(query, res, next) {
+  listEmergencies(query, res, next) {
     const { limit = 50, skip = 0 } = query;
     EmergencyModel.list({ limit, skip })
       .then(emergencyList => res.json(emergencyList))
@@ -35,26 +34,21 @@ class EmergencyController {
   }
 
   updateEmergency(persitedEmergency, updatedEmergencyState, res, next) {
-    Object.keys(updatedEmergencyState).filter(propertyName => persitedEmergency[propertyName] 
-      && propertyName !== '_id' && propertyName !== '__v').forEach(propertyName => {
+    if (!updatedEmergencyState.date || !updatedEmergencyState.type_emergency /*|| !emergency.driver || !emergency.ambulance*/ ||
+    !updatedEmergencyState.paramedic.length > 0 || !updatedEmergencyState.patient.length > 0 /*|| !emergency.hospital*/ ||
+    !updatedEmergencyState.location.coordinates.length > 0) {
+      res.status(500);
+      return res.json({message: 'Ingrese los campos obligatorios'});
+    }
+    Object.keys(updatedEmergencyState).filter(propertyName => persitedEmergency[propertyName] && propertyName !== '_id' && propertyName !== '__v').forEach(propertyName => {
       persitedEmergency[propertyName] = updatedEmergencyState[propertyName];
     });
-     if (!emergency.date || !emergency.typeEmergency || !emergency.locationEmergency || 
-        !emergency.ambulance || !emergency.paramedic.length < 1 || !emergency.patient.length < 1
-        || !emergency.hospital || !emergency.driver) {
-        res.status(500);
-        return res.json({message: 'ingrese los campos obligatorios'});
-    }
     persitedEmergency.save()
       .then(savedEmergency => res.json(savedEmergency))
       .catch(e => next(e));
   }
 
   deleteEmergency(persitedEmergency, res, next) {
-    if (!persitedEmergency.id) {
-      res.status(500);
-      return res.json({message: 'Por favor ingrese el id a eliminar'});
-    }
     persitedEmergency.remove()
       .then(deletedEmergency => res.json(deletedEmergency))
       .catch(e => next(e));

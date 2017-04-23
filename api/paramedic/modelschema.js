@@ -24,7 +24,7 @@ ParamedicSchema.statics = {
         if (contact) {
           return contact;
         }
-        const err = new Error(`not found the paramedic with the id ${id}`);
+        const err = new Error(`El paramedico con el id ${id} no se existe`);
         return Promise.reject(err);
       });
   }

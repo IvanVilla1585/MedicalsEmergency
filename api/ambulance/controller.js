@@ -13,8 +13,8 @@ class AmbulanceController {
   createAmbulance(req, res, next) {
     let ambulance = new AmbulanceModel(req.body);
     if (!ambulance.car || !ambulance.car_plate || !ambulance.type_ambulance) {
-      res.status(400);
-      return res.json({message: 'ingrese los campos obligatorios'});
+      res.status(500);
+      return res.json({message: 'Ingrese los campos obligatorios'});
     }
     ambulance.save()
       .then(savedAmbulance => res.json(savedAmbulance))
@@ -29,6 +29,10 @@ class AmbulanceController {
   }
 
   updateAmbulance(persitedAmbulance, updatedAmbulanceState, res, next) {
+    if (!updatedAmbulanceState.car || !updatedAmbulanceState.car_plate || !updatedAmbulanceState.type_ambulance) {
+      res.status(500);
+      return res.json({message: 'Ingrese los campos obligatorios'});
+    }
     Object.keys(updatedAmbulanceState).filter(propertyName => persitedAmbulance[propertyName] && propertyName !== '_id' && propertyName !== '__v').forEach(propertyName => {
       persitedAmbulance[propertyName] = updatedAmbulanceState[propertyName];
     });
