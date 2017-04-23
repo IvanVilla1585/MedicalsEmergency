@@ -28,3 +28,4 @@ AmbulanceSchema.statics = {
 };
 const AmbulanceModel = mongoose.model('ambulances', AmbulanceSchema);
 exports.AmbulanceModel = AmbulanceModel;
+exports.AmbulanceSchema = AmbulanceSchema;

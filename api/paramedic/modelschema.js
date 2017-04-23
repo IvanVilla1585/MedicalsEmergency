@@ -31,3 +31,4 @@ ParamedicSchema.statics = {
 };
 const ParamedicModel = mongoose.model('paramedics', ParamedicSchema);
 exports.ParamedicModel = ParamedicModel;
+exports.ParamedicSchema = ParamedicSchema;
