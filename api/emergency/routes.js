@@ -1,76 +1,45 @@
-const { Router, Route } = require('../router');
-const { emergencyController } = require('./controller');
-const express = require('express');
+var { Router, Route } = require('../router');
+var { emergencyController } = require('./controller');
 
-const routerEmergency = express.Router();
-
-routerEmergency.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
-
-routerEmergency.get('/emergencies', (req, res, next) => {
-  emergencyController.listEmergencies(req.query, res, next);
-});
-
-routerEmergency.get('/emergencies/:emergencyId', (req, res, next) => {
-  return res.json(req.emergency);
-});
-
-routerEmergency.post('/emergencies', (req, res, next) => {
-  emergencyController.createEmergency(req, res, next);
-});
-
-routerEmergency.put('/emergencies/:emergencyId', (req, res, next) => {
-  emergencyController.updateEmergency(req.emergency, req.body, res, next);
-});
-
-routerEmergency.delete('/emergencies/:emergencyId', (req, res, next) => {
-  emergencyController.deleteEmergency(req.ambulance, res, next);
-});
-
-module.exports = routerEmergency;
-
-/*
-class ParamedicRoutes extends Router {
+class EmergencyRoutes extends Router {
 
   constructor(app) {
     super(app);
-    app.param('ambulanceId', ambulanceController.loadAmbulanceById);
+    app.param('emergencyId', emergencyController.loadEmergencyById);
   }
 
   get routes() {
     return {
-      '/api/ambulances': [
-        new Route("get", "getAmbulancesList"),
-        new Route("post", "createAmbulance")
+      '/api/emergencies': [
+        new Route("get", "getEmergenciesList"),
+        new Route("post", "createEmergency")
       ],
-      '/api/ambulances/:ambulanceId': [
-        new Route("get", "getAmbulance"),
-        new Route("put", "updateAmbulance"),
-        new Route("delete", "deleteAmbulance")
+      '/api/emergencies/:emergencyId': [
+        new Route("get", "getEmergency"),
+        new Route("put", "updateEmergency"),
+        new Route("delete", "deleteEmergency")
       ]
     };
   }
 
-  createAmbulance(req, res, next) {
-    paramedicController.createAmbulance(req, res, next);
+  createEmergency(req, res, next) {
+    emergencyController.createEmergency(req, res, next);
   }
 
-  getAmbulancesList(req, res, next) {
-    paramedicController.listAmbulances(req.query, res, next);
+  getEmergenciesList(req, res, next) {
+    emergencyController.listEmergencies(req.query, res, next);
   }
 
-  getAmbulance(req, res, next) {
-    return res.json(req.ambulance);
+  getEmergency(req, res, next) {
+    return res.json(req.emergency);
   }
 
-  updateAmbulance(req, res, next) {
-    paramedicController.updateAmbulance(req.ambulance, req.body, res, next);
+  updateEmergency(req, res, next) {
+    emergencyController.updateEmergency(req.emergency, req.body, res, next);
   }
 
-  deleteAmbulance(req, res, next) {
-    paramedicController.deleteAmbulance(req.ambulance, res, next);
+  deleteEmergency(req, res, next) {
+    emergencyController.deleteEmergency(req.emergency, res, next);
   }
 }
-exports.AmbulanceRoutes = AmbulanceRoutes;*/
+exports.EmergencyRoutes = EmergencyRoutes;
