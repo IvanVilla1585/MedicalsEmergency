@@ -19,7 +19,7 @@ class EmergencyController {
     if (!emergency.date || !emergency.type_emergency /*|| !emergency.driver || !emergency.ambulance*/ ||
         !emergency.paramedic.length > 0 || !emergency.patient.length > 0 /*|| !emergency.hospital*/ || !emergency.location.coordinates.length > 0) {
       res.status(500);
-      return res.json({message: 'ingrese los campos obligatorios'});
+      return res.json({message: 'Ingrese los campos obligatorios'});
     }
     emergency.save()
       .then(savedEmergency => res.json(savedEmergency))
@@ -38,7 +38,7 @@ class EmergencyController {
     !updatedEmergencyState.paramedic.length > 0 || !updatedEmergencyState.patient.length > 0 /*|| !emergency.hospital*/ ||
     !updatedEmergencyState.location.coordinates.length > 0) {
       res.status(500);
-      return res.json({message: 'ingrese los campos obligatorios'});
+      return res.json({message: 'Ingrese los campos obligatorios'});
     }
     Object.keys(updatedEmergencyState).filter(propertyName => persitedEmergency[propertyName] && propertyName !== '_id' && propertyName !== '__v').forEach(propertyName => {
       persitedEmergency[propertyName] = updatedEmergencyState[propertyName];
