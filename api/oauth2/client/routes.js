@@ -10,7 +10,7 @@ class ClientRouter extends Router {
     get routes() {
         return {
             'api/client': [
-                new Route("post", [authController.isAuthenticated, "createClient"])
+                new Route("post", ["createClient"])
             ],
             'api/client/:clientId': [
                 new Route("get", [authController.isAuthenticated, "getClient"])
