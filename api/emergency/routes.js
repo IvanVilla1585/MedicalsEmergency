@@ -10,14 +10,14 @@ class EmergencyRoutes extends Router {
 
   get routes() {
     return {
-      '/api/emergencies': [
-        new Route("get", "getEmergenciesList"),
-        new Route("post", "createEmergency")
+      '/emergencies': [
+        new Route("get", ["getEmergenciesList"]),
+        new Route("post", ["createEmergency"])
       ],
-      '/api/emergencies/:emergencyId': [
-        new Route("get", "getEmergency"),
-        new Route("put", "updateEmergency"),
-        new Route("delete", "deleteEmergency")
+      '/emergencies/:emergencyId': [
+        new Route("get", ["getEmergency"]),
+        new Route("put", ["updateEmergency"]),
+        new Route("delete", ["deleteEmergency"])
       ]
     };
   }
