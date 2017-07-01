@@ -11,6 +11,10 @@ var UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    permissions: {
+        type: [String],
+      required: true
     }
 });
 
