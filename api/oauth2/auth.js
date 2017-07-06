@@ -71,15 +71,22 @@ passport.use(new BearerStrategy(
   }
 ));
 
-passport.use('valid_token', new BasicStrategy(
-  function (accessToken, callback) {
-    TokenModel.findOne({value: accessToken})
+passport.use('permissions', new BasicStrategy(
+  function (request, sessions, callback) {
+    UserModel.findOne({ username: sessions.user.username })
       .exec()
-      .then((token) => {
-        if (!token)
-          return callback(null, false);
-        callback(null, user, { scope: '*' });
-      })
+      .then((user) => {
+
+        if (!user) { return callback(null, false); }
+
+        user.verifyPassword(password, function (err, isMatch) {
+          if (err) { return callback(err); }
+
+          if (!isMatch) { return callback(null, false); }
+
+          return callback(null, user);
+        });
+      }).catch(e => callback(e));
   }
 ));
 
