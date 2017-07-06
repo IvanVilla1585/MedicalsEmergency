@@ -13,7 +13,7 @@ var UserSchema = new Schema({
         required: true
     },
     permissions: {
-        type: [String],
+        type: [mongoose.Schema.Types.Mixed],
       required: true
     }
 });
