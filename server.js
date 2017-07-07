@@ -7,9 +7,9 @@ var passport = require('passport');
 const {AmbulanceRoutes} = require('./api/ambulance/routes');
 const {ParamedicRoutes} = require('./api/paramedic/routes');
 const {EmergencyRoutes} = require('./api/emergency/routes');
-const {ClientRouter} = require('./oauth2/client/routes');
-const {UserRouter} = require('./oauth2/user/routes');
-const {OAuth2Router} = require('./oauth2/routes');
+const {ClientRouter} = require('./api/oauth2/client/routes');
+const {UserRouter} = require('./api/oauth2/user/routes');
+const {OAuth2Router} = require('./api/oauth2/routes');
 
 const app = express();
 const port = process.env.PORT || 3001;

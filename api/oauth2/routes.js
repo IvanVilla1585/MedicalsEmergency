@@ -14,7 +14,7 @@ class OAuth2Router extends Router {
                 new Route("post", [authController.isAuthenticated, oauth2Controller.decision])
             ],
             '/oauth2/token': [
-                new Route("post", [authController.isClientAuthenticated, oauth2Controller.token])
+                new Route("post", [oauth2Controller.token])
             ]
         };
     }
