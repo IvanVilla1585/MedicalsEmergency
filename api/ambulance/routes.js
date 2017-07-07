@@ -1,5 +1,6 @@
 var { Router, Route } = require('../router');
 var { ambulanceController } = require('./controller');
+const authController = require('../oauth2/auth');
 
 class AmbulanceRoutes extends Router {
 
@@ -10,14 +11,14 @@ class AmbulanceRoutes extends Router {
 
   get routes() {
     return {
-      '/api/ambulances': [
-        new Route("get", "getAmbulancesList"),
-        new Route("post", "createAmbulance")
+      '/ambulances': [
+        new Route("get", [authController.isAuthenticated, "getAmbulancesList"]),
+        new Route("post", [authController.isAuthenticated, "createAmbulance"])
       ],
-      '/api/ambulances/:ambulanceId': [
-        new Route("get", "getAmbulance"),
-        new Route("put", "updateAmbulance"),
-        new Route("delete", "deleteAmbulance")
+      '/ambulances/:ambulanceId': [
+        new Route("get", [authController.isAuthenticated, "getAmbulance"]),
+        new Route("put", [authController.isAuthenticated, "updateAmbulance"]),
+        new Route("delete", [authController.isAuthenticated, "deleteAmbulance"])
       ]
     };
   }

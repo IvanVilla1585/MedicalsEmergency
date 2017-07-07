@@ -9,10 +9,10 @@ class UserRouter extends Router {
 
     get routes() {
         return {
-            'api/user': [
+            '/user': [
                 new Route("post", "createUser")
             ],
-            'api/users': [
+            '/users': [
                 new Route("get", [authController.isAuthenticated, "getUsers"])
             ]
         };

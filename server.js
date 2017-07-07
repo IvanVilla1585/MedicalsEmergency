@@ -12,7 +12,7 @@ const {UserRouter} = require('./api/oauth2/user/routes');
 const {OAuth2Router} = require('./api/oauth2/routes');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://localhost/medicalemergency');
 app.set('view engine', 'ejs');

@@ -10,14 +10,14 @@ class ParamedicRoutes extends Router {
 
   get routes() {
     return {
-      '/api/paramedics': [
-        new Route("get", "getParamedicsList"),
-        new Route("post", "createParamedic")
+      '/paramedics': [
+        new Route("get", ["getParamedicsList"]),
+        new Route("post", ["createParamedic"])
       ],
-      '/api/paramedics/:paramedicId': [
-        new Route("get", "getParamedic"),
-        new Route("put", "updateParamedic"),
-        new Route("delete", "deleteParamedic")
+      '/paramedics/:paramedicId': [
+        new Route("get", ["getParamedic"]),
+        new Route("put", ["updateParamedic"]),
+        new Route("delete", ["deleteParamedic"])
       ]
     };
   }
