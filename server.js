@@ -32,4 +32,7 @@ let clientRouter = new ClientRouter(app);
 let userRouter = new UserRouter(app);
 let oauth2Router = new OAuth2Router(app);
 
+//var sender = new Sender('amqp://ivan:ivan@10.100.75.131','manuelao');
+//sender.sendMessage('Hola Ivan');
+
 const server = app.listen(port, () => console.log(`server listening in port ${port}`));
