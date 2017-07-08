@@ -12,11 +12,6 @@ class EmergencyController {
       })
       .catch(e => next(e));
   }
-
-  isEmptyObject(obj) {
-    for(var i in obj) { return false; }
-    return true;
-  }
   createEmergency(req, res, next) {
     let emergency = new EmergencyModel(req.body);
     if (!emergency.date || !emergency.type_emergency /*|| !emergency.driver || !emergency.ambulance*/ ||

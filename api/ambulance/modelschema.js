@@ -14,7 +14,7 @@ AmbulanceSchema.statics = {
       .limit(parseInt(limit))
       .exec();
   },
-  getContactById(id) {
+  getAmbulanceById(id) {
     return this.findById(id)
       .exec()
       .then((contact) => {
