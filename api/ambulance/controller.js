@@ -2,7 +2,7 @@ var { AmbulanceModel } = require('./modelschema');
 
 class AmbulanceController {
   loadAmbulanceById(req, res, next, id) {
-    AmbulanceModel.getContactById(id)
+    AmbulanceModel.getAmbulanceById(id)
       .then(ambulance => {
         req.ambulance = ambulance;
         return next();
