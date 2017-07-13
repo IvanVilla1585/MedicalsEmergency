@@ -9,7 +9,6 @@ const EmergencySchema = new mongoose.Schema({
   ambulance: {type: AmbulanceSchema, require: true},
   paramedic: {type: [ParamedicSchema], require: true},
   patient: {type: [mongoose.Schema.Types.Mixed], require: true},
-  hospital: {type: [mongoose.Schema.Types.Mixed], require: true},
   location: {
     type: {
       type: String,
