@@ -1,5 +1,6 @@
 var { Router, Route } = require('../router');
 var { paramedicController } = require('./controller');
+var authController = require('./auth');
 
 class ParamedicRoutes extends Router {
 
@@ -11,13 +12,13 @@ class ParamedicRoutes extends Router {
   get routes() {
     return {
       '/paramedics': [
-        new Route("get", ["getParamedicsList"]),
-        new Route("post", ["createParamedic"])
+        new Route("get", [authController.isAuthenticated, "getParamedicsList"]),
+        new Route("post", [authController.isAuthenticated, "createParamedic"])
       ],
       '/paramedics/:paramedicId': [
-        new Route("get", ["getParamedic"]),
-        new Route("put", ["updateParamedic"]),
-        new Route("delete", ["deleteParamedic"])
+        new Route("get", [authController.isAuthenticated, "getParamedic"]),
+        new Route("put", [authController.isAuthenticated, "updateParamedic"]),
+        new Route("delete", [authController.isAuthenticated, "deleteParamedic"])
       ]
     };
   }
