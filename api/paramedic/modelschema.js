@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 const ParamedicSchema = new mongoose.Schema({
   name: { type: String, require: true},
-  lastname: { type: String},
-  phone: {type: String, require: true},
+  lastname: { type: String, require: true},
+  phone: {type: String},
   gender: {type: Number, require: true},
-  cellPhone: {type: String},
+  cellPhone: {type: String}, require: true,
   birthdate: {type: Date},
   specialization: {type: String, require: true}
 });
