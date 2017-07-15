@@ -1,6 +1,6 @@
 var { Router, Route } = require('../router');
 var { paramedicController } = require('./controller');
-var authController = require('./auth');
+var authController = require('../oauth2/auth');
 
 class ParamedicRoutes extends Router {
 
