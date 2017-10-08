@@ -54,7 +54,7 @@ server.exchange(oauth2orize.exchange.code((client, code, redirectUri, callback) 
 
 exports.authorization = [
     server.authorization((clientId, redirectUri, callback) => {
-
+        console.log(clientId);
         ClientModel.findOne({ id: clientId })
             .exec()
             .then((client) => callback(null, client, redirectUri))
